@@ -22,7 +22,12 @@ An older version of this dataset can also be found at: https://www.kaggle.com/da
 2) imblearn: SMOTENC and RandomUnderSampler to handle data imbalances
 3) XGBoost: gradient boosted trees classifier
 
-## Results
+## Notebooks
+We split our work to two notebooks:
+1) Data cleaning and feature engineering (data_cleaning_and_feature_engineering.ipynb)
+2) Modeling (Modeling.ipynb)
+
+## Methodology
 
 ### Best models
 We performed a search over SARIMA order parameters and found that the best models to describe the time series are:
