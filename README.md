@@ -2,7 +2,7 @@
 Analyzing cats and dogs data at the largest no-kill shelter in the United States.
 
 ## Goals
-1) Create a model to classify whether an animal at the shelter ends up with a "good" (e.g., adopted, returned to owner), "bad" (e.g., euthanized, lost), or "neutral" (e.g., transferred to a different shelter) outcome; a key challenge in accomplishing this goal is that the dataset is imbalanced (very few "bad" outcomes)
+1) Create a model to classify whether an animal at the shelter ends up with a "good" (e.g., adopted, returned to owner), "bad" (e.g., euthanized, lost), or "neutral" (e.g., transferred to a different shelter) outcome; a key challenge in accomplishing this goal is that the dataset is heavily **imbalanced** (very few "bad" outcomes)
 2) Use feature importance to find the features that best drive our classification
  
 ## Description of Data
