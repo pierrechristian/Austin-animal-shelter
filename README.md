@@ -69,7 +69,7 @@ In the previous steps, I already engineered some new features that might be usef
 1) 'stay_length_days': the length of stay in the shelter 
 2) 'mult': the number of times the same animal visits the shelter
 
-In this section, I engineered a few other features:
+In this section, I engineered a two other features:
 
 1) intake_day and intake_month: People often get pets at certain months of the year (e.g., Christmas) or at certain days of the week (e.g., weekends), so we can hypothize that the month or day of the week of outcome_time would be important predictors of an animal's outcome. However, outcome_time is not a good variable for predicting whether an animal will get adopted, as the outcome_time is recorded AFTER an animal exits the shelter. Instead, we want to know the chances for an animal to be adopted when they are still in the shelter! If we assume that there is some correlation between outcome_time and intake_time, we can instead hypothize that the month or day of the week of intake_time would be important predictors of an animal's outcome. Therefore, I generated the intake_day and intake_month features out of intake_time.
 2) "good", "bad" or "neutral" outcomes: instead of trying to classify the outcome_type exactly, let us instead try to predict whether a particular animal's visit ended up with a good, bad, or neutral outcome. To do this, let us group the rows with good outcomes (Return to Owner, Adoption, or Rto-Adopt), bad outcomes (Euthanasia, Died, Missing, Disposal), and neutral outcomes (Transfer, Relocate).
