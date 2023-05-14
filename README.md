@@ -6,13 +6,18 @@ Analyzing cats and dogs data at the largest no-kill shelter in the United States
 2) Use feature importance to find the features that best drive our classification
  
 ## Context
-
+The Austin Animal Center is the largest no-kill shelter in the United States. 
 
 ## Description of Data
+Two csv files,
 
+Austin_Animal_Center_Intakes: describes the animal at the time of "intake", i.e., when the animal enters the shelter. Columns include the time the animal enters, the breed, sex upon intake, the age of the animal, the color of the animal, where the animal was found, etc. Indexed by an 'Animal ID' unique to the animal.
+
+Austin_Animal_Center_Outcomes: describes the animal at the time of "outcome", i.e., when the animal exited the shelter. Columns include the time the animal exits, the breed, sex upon outcome, the age of the animal, the color of the animal, what the outcome is (e.g., adopted or euthanized), etc. Indexed by an 'Animal ID' unique to the animal.
 
 ## Data Source
 Austin Animal Shelter at the City of Austin Open Data Portal: https://data.austintexas.gov/Health-and-Community-Services/Austin-Animal-Center-Outcomes/9t4d-g238
+
 
 ## Notable Packages Used
 1) scikit-learn: RandomForestClassifier
