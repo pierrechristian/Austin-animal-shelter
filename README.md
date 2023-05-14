@@ -64,7 +64,7 @@ After merging, we ended up with one dataframe with the following features:
 6) We want to focus on cats and dogs for this project, while this data table contains a small amount of other animals (e.g., birds, livestock). Non-cats/dogs rows are dropped from the table.
 7) Breeds and colors with only a few entries per class are consolidated into a new class called 'Others'.
 
-### Feature engineering
+## Feature engineering
 
 ### Best models
 We performed a search over SARIMA order parameters and found that the best models to describe the time series are:
