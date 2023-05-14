@@ -33,31 +33,38 @@ We split our work to two notebooks:
 The most important task in our data cleaning section is to merge the two data tables (Austin_Animal_Center_Intakes describing animal intakes and Austin_Animal_Center_Outcomes describing animal outcomes) into one dataframe with all the information that we require for our analysis. The issue is that there are animals who are repeat visitors to the shelter, so we cannot perform a merge on "Animal ID". To handle this, I created a new column that can be merged upon. This new column holds unique "visit IDs" combining the animal ID and the number of visitations, e.g., an animal with Animal ID A521520 that visits three times has three rows in the dataframes, each will have different visit IDs: A5215200, A5215201, and A5215202.
 
 After merging, we ended up with one dataframe with the following features:
-visit_id           : unique ID for each animal visit to the shelter
-id                 : unique ID labeling each animal
-intake_time        : time the animal enters the shelter
-intake_MonthYear   : month/year the animal enters the shelter
-intake_loc         : where the animal was found
-intake_type        : how the animal was found (e.g., owner surrender, stray)
-intake_condition   : animal condition when it enters the shelter (e.g., sick)
-animal_type        : type of animal (e.g., cats, dogs)
-intake_sex         : sex of animal upon intake (e.g., spayed male)
-intake_age         : age of animal upon intake
-outcome_time       : time the animal exits the shelter (including via euthanasia)
-outcome_MonthYear  : month/year the animal exits the shelter
-outcome_type       : how the animal exits the shelter (e.g., adoption, return to owner, euthanasia)
-outcome_subtype    : extra information on how the animal exits the shelter (e.g., rabies risk)
-outcome_sex        : sex of animal upon outcome (e.g., spayed male)
-outcome_age        : age of animal upon outcome
-breed              : breed of animal
-color              : color of animal
-dob                : date of birth of the animal
-repeat             : whether the animal is a repeat visitor at the shelter
-mult               : how many times the animal has visited the shelter
+- visit_id           : unique ID for each animal visit to the shelter
+- id                 : unique ID labeling each animal
+- intake_time        : time the animal enters the shelter
+- intake_MonthYear   : month/year the animal enters the shelter
+- intake_loc         : where the animal was found
+- intake_type        : how the animal was found (e.g., owner surrender, stray)
+- intake_condition   : animal condition when it enters the shelter (e.g., sick)
+- animal_type        : type of animal (e.g., cat, dog, bird)
+- intake_sex         : sex of animal upon intake (e.g., spayed male)
+- intake_age         : age of animal upon intake
+- outcome_time       : time the animal exits the shelter (including via euthanasia)
+- outcome_MonthYear  : month/year the animal exits the shelter
+- outcome_type       : how the animal exits the shelter (e.g., adoption, return to owner, euthanasia)
+- outcome_subtype    : extra information on how the animal exits the shelter (e.g., rabies risk)
+- outcome_sex        : sex of animal upon outcome (e.g., spayed male)
+- outcome_age        : age of animal upon outcome
+- breed              : breed of animal
+- color              : color of animal
+- dob                : date of birth of the animal
+- repeat             : whether the animal is a repeat visitor at the shelter
+- mult               : how many times the animal has visited the shelter
  
-
 ### Dropping and imputing missing data
+1) There is a lot of null values in outcome_subtype. This column contains miscellaneous information such as whether the animal is a 'Rabies Risk' or is currently 'At Vet'. While this column contains interesting information, I will not explore it in this project and thus dropped this column.
+2) There are rows with missing income_sex, outcome_sex, income_age, outcome_type, intake_condition, breed, and outcome_age. I dropped rows with missing values on these columns except for outcome_age -- they represent a small percentage of the total data, so their removal should not affect the conclusion of the analysis. 
+3) There are a few rows with missing outcome_age. This was filled by taking intake_age and adding to it the length of stay in the shelter, stay_length.
+4) Duplicated information are deleted from the table (e.g., outcome_age, intake_age, and stay_length are collinear variables, we only need two of them in our data table).
+5) Clearly anomalous data points (e.g., stay_length of less than 0 days) are dropped from the table. 
+6) We want to focus on cats and dogs for this project, while this data table contains a small amount of other animals (e.g., birds, livestock). Non-cats/dogs rows are dropped from the table.
+7) Breeds and colors with only a few entries per class are consolidated into a new class called 'Others'.
 
+### Feature engineering
 
 ### Best models
 We performed a search over SARIMA order parameters and found that the best models to describe the time series are:
