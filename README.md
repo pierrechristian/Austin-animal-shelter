@@ -5,11 +5,8 @@ Analyzing cats and dogs data at the largest no-kill shelter in the United States
 1) Create a model to classify whether an animal at the shelter ends up with a "good" (e.g., adopted, returned to owner), "bad" (e.g., euthanized, lost), or "neutral" (e.g., transferred to a different shelter) outcome 
 2) Use feature importance to find the features that best drive our classification
  
-## Context
-The Austin Animal Center is the largest no-kill shelter in the United States. 
-
 ## Description of Data
-Two csv files,
+Two csv files:
 
 Austin_Animal_Center_Intakes: describes the animal at the time of "intake", i.e., when the animal enters the shelter. Columns include the time the animal enters, the breed, sex upon intake, the age of the animal, the color of the animal, where the animal was found, etc. Indexed by an 'Animal ID' unique to the animal.
 
@@ -18,6 +15,8 @@ Austin_Animal_Center_Outcomes: describes the animal at the time of "outcome", i.
 ## Data Source
 Austin Animal Shelter at the City of Austin Open Data Portal: https://data.austintexas.gov/Health-and-Community-Services/Austin-Animal-Center-Outcomes/9t4d-g238
 
+### Disclaimer on data
+An older version of our dataset can also be found at: https://www.kaggle.com/datasets/aaronschlegel/austin-animal-center-shelter-intakes-and-outcomes
 
 ## Notable Packages Used
 1) scikit-learn: RandomForestClassifier
