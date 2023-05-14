@@ -1,10 +1,10 @@
 # Austin-animal-shelter
-Analyzing animal shelter data at the largest no-kill shelter in the United States
+Analyzing cats and dogs data at the largest no-kill shelter in the United States
 
 ## Goals
-1) Create a model to forecast the Indonesian non-oil/gas import and export monthly time series the year after the end of the available dataset
-2) Test for the existence of cointegration on the import and export time series
-
+1) Create a model to classify whether an animal at the shelter ends up with a "good" (e.g., adopted, returned to owner), "bad" (e.g., euthanized, lost), or "neutral" (e.g., transferred to a different shelter) outcome 
+2) Use feature importance to find the features that best drive our classification
+ 
 ## Context
 
 ### Indonesia's role in the commodity sector
