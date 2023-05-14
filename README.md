@@ -15,8 +15,7 @@ Austin_Animal_Center_Outcomes: describes the animal at the time of "outcome", i.
 ## Data Source
 Austin Animal Shelter at the City of Austin Open Data Portal: https://data.austintexas.gov/Health-and-Community-Services/Austin-Animal-Center-Outcomes/9t4d-g238
 
-### Disclaimer on data
-An older version of our dataset can also be found at: https://www.kaggle.com/datasets/aaronschlegel/austin-animal-center-shelter-intakes-and-outcomes
+An older version of this dataset can also be found at: https://www.kaggle.com/datasets/aaronschlegel/austin-animal-center-shelter-intakes-and-outcomes
 
 ## Notable Packages Used
 1) scikit-learn: RandomForestClassifier
