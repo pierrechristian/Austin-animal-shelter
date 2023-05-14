@@ -74,13 +74,26 @@ In this section, I engineered a two other features:
 1) intake_day and intake_month: People often get pets at certain months of the year (e.g., Christmas) or at certain days of the week (e.g., weekends), so we can hypothize that the month or day of the week of outcome_time would be important predictors of an animal's outcome. However, outcome_time is not a good variable for predicting whether an animal will get adopted, as the outcome_time is recorded AFTER an animal exits the shelter. Instead, we want to know the chances for an animal to be adopted when they are still in the shelter! If we assume that there is some correlation between outcome_time and intake_time, we can instead hypothize that the month or day of the week of intake_time would be important predictors of an animal's outcome. Therefore, I generated the intake_day and intake_month features out of intake_time.
 2) "good", "bad" or "neutral" outcomes: instead of trying to classify the outcome_type exactly, let us instead try to predict whether a particular animal's visit ended up with a good, bad, or neutral outcome. To do this, let us group the rows with good outcomes (Return to Owner, Adoption, or Rto-Adopt), bad outcomes (Euthanasia, Died, Missing, Disposal), and neutral outcomes (Transfer, Relocate).
 
-### Best models
-We performed a search over SARIMA order parameters and found that the best models to describe the time series are:
+## Modeling
+In this section, I want to predict whether an animal's outcome is good, bad, or neutral. A key point in this analysis is the imbalanced dataset; because this animal shelter is "no-kill", there will be very few euthanasia. In fact, most outcomes for the animals are good (e.g., adopted or returned to owner), and there are very few bad (e.g., euthanasia) outcomes! 
 
--) Export values: SARIMA(0,1,1)(2,0,0)[12]      
--) Export weights: SARIMA(0,1,0)(2,0,0)[12]   
--) Import values: SARIMA(0,1,1)(0,0,1)[12]      
--) Import weights: SARIMA(0,1,1)(0,0,2)[12]  
+![imbalance_dataset](https://github.com/pierrechristian/Austin-animal-shelter/assets/5288149/fedfa773-1bff-4cb3-b498-2f62b094e861)
+
+We will use two models, **random forest** and **gradient boosted trees**. We will also try multiple methods for dealing with the imbalanced dataset!
+
+### Random Forest
+My strategy with applying random forest on this imbalanced dataset is the following:
+
+1) Rebalance or weight the data
+2) Perform grid-search cross-validation to find the optimal random forest parameters
+3) Compare the weighted f1 score between the different rebalance/data-weighting schemes to find the best model
+
+We will use three rebalancing/data-weighting schemes to handle the imbalanced dataset:
+
+1) SMOTENC (Synthetic Minority Over-sampling Technique for Nominal and Continuous): this is an oversampling algorithm that creates synthetic data for the minority group, and is an extension of SMOTE that allows for categorical features. 
+2) random undersample: undersample the majority groups by taking random samples of it. This technique is much faster than SMOTENC, but come at the cost of greatly reducing our sample size.
+3) class-weights: the random forest algorithm allows for a natural way to weigh different classes, so we can use class weights on the random forest algorithm to put different emphases on minority/majority groups instead of resampling the training set.
+
 
 ### Forecasts
 ![forecastexp_dol](https://user-images.githubusercontent.com/5288149/226216780-dd8a5f7c-1610-4f44-a4f6-a9033262abef.png)
