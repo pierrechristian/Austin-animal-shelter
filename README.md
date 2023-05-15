@@ -86,7 +86,7 @@ My strategy with applying random forest on this imbalanced dataset is the follow
 
 1) Rebalance or weight the data
 2) Perform grid-search cross-validation to find the optimal random forest parameters
-3) Compare the weighted f1 score between the different rebalance/data-weighting schemes to find the best model
+3) Compare the weighted f1 score on the holdout set (20%) between the different rebalance/data-weighting schemes to find the best model
 
 We will use three rebalancing/data-weighting schemes to handle the imbalanced dataset:
 
@@ -94,7 +94,7 @@ We will use three rebalancing/data-weighting schemes to handle the imbalanced da
 2) random undersample: undersample the majority groups by taking random samples of it. This technique is much faster than SMOTENC, but come at the cost of greatly reducing our sample size.
 3) class-weights: the random forest algorithm allows for a natural way to weigh different classes, so we can use class weights on the random forest algorithm to put different emphases on minority/majority groups instead of resampling the training set.
 
-The resulting weighted f1-scores are the following:
+The resulting weighted f1-scores on the holdout set are the following:
 1) SMOTENC: 0.82
 2) random undersample: 0.79
 3) class-weights: 0.34
@@ -104,10 +104,36 @@ Comparing the three random forest models (which differs based on how we handle t
 However, the f1-score of the "bad" outcome for class-weights (0.34) is significantly worse than SMOTENC (0.39) and random undersample (0.42), owing to class-weights having poor recall for "bad" oucomes (0.24). As identifying the bad outcomes correctly is important in this problem, I do not think that the slight increase of 0.01 point in weighted f1-score in using the class-weights instead of SMOTENC is worth it. Thus, I declare our best random forest model to be the SMOTENC model.
 
 ### Gradient Boosted Trees with XGBoost
-Next, I also modeled the dataset with gradient boosted trees. At the end we can compare its performance with the random forest models to obtain our final model.
+Next, I also modeled the dataset with gradient boosted trees. At the end we can compare its performance on the holdout set (20%) with the random forest models to obtain our final model.
 
 As with random forest, gradient boosted trees also lend itself to class weightings to handle the dataset imbalance. In this section I tried XGBoost both with and without class weights. As before, the optimal XGBoost parameters were found by performing grid-search cross-validation.
 
+The resulting weighted f1-scores on the holdout set are the following:
+1) Without class-weights: 0.80
+2) With class-weights: 0.81
+
+The weighted f1-score for the two XGBoost models are smaller than our best random forest model (SMOTENC), so **our best overall model is the random forest model with SMOTENC**.
+
+### Best Model: Random Forest with SMOTENC
+
+Here are the performance metrics of our best performing model on the holdout set, the random forest model with SMOTENC to rebalance the dataset. Just as a reminder our task is to predict each datapoint as having "bad", "good", or "neutral" outcome. The data is imbalanced, with few examples of "bad" outcomes.
+
+- "bad": precision=0.35, recall=0.45, f1-score=0.39
+- "good": precision=0.87, recall=0.91, f1-score=0.68
+- "neutral": precision=0.74, recall=0.63, f1-score=0.68
+- weighted average: precision=0.82, recall=0.82, f1-score=0.82
+- accuracy: 0.82 
+          precision    recall  f1-score   support
+
+         bad       0.35      0.45      0.39       970
+        good       0.87      0.91      0.89     18570
+     neutral       0.74      0.63      0.68      7312
+
+    accuracy                           0.82     26852
+   macro avg       0.66      0.66      0.66     26852
+weighted avg       0.82      0.82      0.82     26852
+
+## Feature Importance
 
 
 ## Possible improvements and future directions
