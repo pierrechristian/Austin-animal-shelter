@@ -118,42 +118,30 @@ The weighted f1-score for the two XGBoost models are smaller than our best rando
 
 Here are the performance metrics of our best performing model on the holdout set, the random forest model with SMOTENC to rebalance the dataset. Just as a reminder our task is to predict each datapoint as having "bad", "good", or "neutral" outcome. The data is imbalanced, with few examples of "bad" outcomes.
 
-- "bad": precision=0.35, recall=0.45, f1-score=0.39
-- "good": precision=0.87, recall=0.91, f1-score=0.68
-- "neutral": precision=0.74, recall=0.63, f1-score=0.68
-- weighted average: precision=0.82, recall=0.82, f1-score=0.82
-- accuracy: 0.82 
-
-
 | outcome | precision | recall | f1-score   |
-| ------------- | ------------- |
+| ------------- | ------------- | ------------- | ------------- |
 | bad  |0.35  |    0.45    |  0.39    |
 | good  | 0.87  |    0.91   |   0.89 |
 |neutral | 0.74    |  0.63    |  0.68 |
 |weighted average | 0.82    |  0.82    |  0.82 |
 
-          precision    recall  f1-score   support
-
-         bad       0.35      0.45      0.39       970
-        good       0.87      0.91      0.89     18570
-     neutral       0.74      0.63      0.68      7312
-
-    accuracy                           0.82     26852
-   macro avg       0.66      0.66      0.66     26852
-weighted avg       0.82      0.82      0.82     26852
-
 ## Feature Importance
 
+Now that we have a a best overall model, we can see which of the features drive the classification the most. We can do this by computing the permutation importance:
 
-## Possible improvements and future directions
-We identified a few weaknesses in our analysis that could be improved in the future:
+![permutation_importance](https://github.com/pierrechristian/Austin-animal-shelter/assets/5288149/18607bc8-7873-44e7-b47f-03053362b5a8)
 
-1) Looking at the residual QQ-plots and histograms, we found deviations from normality. This will affect the widths of the confidence intervals of our forecasts. Future work can perform modelling with other distributions (e.g., Student's t or skewed-t distributions).
 
-2) Extending the time series included in the analysis from 2014 down to 1998 would give more baseline for the model to learn the pattern in the time series (especially the cointegration pattern). Care should be taken when using datapoints near 1998, as post-New Order policies might have not taken effect yet. 
+The permutation importance plot reveals that the top three features that are most important are:
 
-Here are some future research directions that could be interesting to explore:
+1) outcome_sex: in addition to male/female, the "outcome_sex" feature records whether the animal has been spayed/neutered at the time of outcome. There are two reasons of why this feature might be the one that is most important. First, animals that are already spayed/neutered are more attractive to adopters as spaying/neutering costs money to do. The second reason is that the "good" outcome include "return_to_owner", indicating that they are lost pets instead of wild animals, and most pet cats/dogs in the US are spayed/neutered. 
 
-1) Performing similar analysis to particular sectors of imports/exports, e.g., just agricultural products, or even single items like coffee or cocoa.
-2) Exploring relationships between Indonesia's imports/exports and various environmental time series (e.g., temperature or rainfall time series) with vector auto-regression.
-3) Analyzing differences in the imports/exports time series between the post-New Order era and the New Order era.
+2) stay_length_days: this feature records the length of time the animal is in the shelter. A lost pet is quickly picked up by their owners, resulting in a good outcome within a short amount of time. 
+
+3) animal_type: indicates cats vs dogs. It turns out that dogs are slightly (about 5% more) more favored to have good outcome than cats.
+
+## Future Directions
+
+1) Performing a similar analysis on a shelter that is not non-kill: particularly I am interested in possible differences in features that best decide an animal getting a bad outcome
+2) Performing a similar analysis on a shelter from a different country: different cultures have different predilections on what makes a favorable pet (e.g., dogs vs cats, different attitudes on animal spaying/neutering)
+3) Time series analysis: an investigation on how the feature importance plot changes across time can show how attitudes and practices on pet adoption and shelter care changes with time 
