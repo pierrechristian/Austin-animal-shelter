@@ -103,23 +103,12 @@ Comparing the three random forest models (which differs based on how we handle t
 
 However, the f1-score of the "bad" outcome for class-weights (0.34) is significantly worse than SMOTENC (0.39) and random undersample (0.42), owing to class-weights having poor recall for "bad" oucomes (0.24). As identifying the bad outcomes correctly is important in this problem, I do not think that the slight increase of 0.01 point in weighted f1-score in using the class-weights instead of SMOTENC is worth it. Thus, I declare our best random forest model to be the SMOTENC model.
 
-### Forecasts
-![forecastexp_dol](https://user-images.githubusercontent.com/5288149/226216780-dd8a5f7c-1610-4f44-a4f6-a9033262abef.png)
-![forecastexp_weight](https://user-images.githubusercontent.com/5288149/226216789-2aced4a9-8434-46db-99e5-b5febe4b9bee.png)
-![forecastimp_dol](https://user-images.githubusercontent.com/5288149/226216794-260c6a01-a983-435a-9f8d-bd714421d886.png)
-![forecastimp_weight](https://user-images.githubusercontent.com/5288149/226216796-8e10d996-791f-457f-9d1f-09f907b2b162.png)
+### Gradient Boosted Trees with XGBoost
+Next, I also modeled the dataset with gradient boosted trees. At the end we can compare its performance with the random forest models to obtain our final model.
 
-The SMAPE values for our predictions are:
+As with random forest, gradient boosted trees also lend itself to class weightings to handle the dataset imbalance. In this section I tried XGBoost both with and without class weights. As before, the optimal XGBoost parameters were found by performing grid-search cross-validation.
 
--) Export values: 4.92   
--) Export weights: 6.93   
--) Import values: 5.97      
--) Import weights: 6.39
 
-The SMAPE values indicate a good fit, i.e., that we captured the general trend of the time series. However, the actual confidence intervals are quite wide -- certainly, too wide for me to be comfortable in using them to build a trading strategy or inform a political decision! This simply indicates the fact that the patterns in our time series is hard to predict. 
-
-### Existence of cointegration
-The result for the augmented Engle-Granger cointegration p-value between export value and import value is 0.056 while the p-value between export value and import weight is 0.076 (the null hypothesis is no cointegration). Neither is strong enough to claim existence of cointegration with significant confidence. If it is true that a healthy economy should strive for cointegration between exports and imports, this result argues that it might be necessary for Indonesia look into its export/import policies! 
 
 ## Possible improvements and future directions
 We identified a few weaknesses in our analysis that could be improved in the future:
