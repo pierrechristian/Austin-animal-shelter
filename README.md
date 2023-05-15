@@ -94,6 +94,14 @@ We will use three rebalancing/data-weighting schemes to handle the imbalanced da
 2) random undersample: undersample the majority groups by taking random samples of it. This technique is much faster than SMOTENC, but come at the cost of greatly reducing our sample size.
 3) class-weights: the random forest algorithm allows for a natural way to weigh different classes, so we can use class weights on the random forest algorithm to put different emphases on minority/majority groups instead of resampling the training set.
 
+The resulting weighted f1-scores are the following:
+1) SMOTENC: 0.82
+2) random undersample: 0.79
+3) class-weights: 0.34
+
+Comparing the three random forest models (which differs based on how we handle the data imbalances), the one with the best weighted f1-score is class-weights with a weighted f1 of 0.83. This is very slightly greater than the weighted f1-score of SMOTENC (0.82) and markedly better than the weighted f1-score of random undersample (0.79).
+
+However, the f1-score of the "bad" outcome for class-weights (0.34) is significantly worse than SMOTENC (0.39) and random undersample (0.42), owing to class-weights having poor recall for "bad" oucomes (0.24). As identifying the bad outcomes correctly is important in this problem, I do not think that the slight increase of 0.01 point in weighted f1-score in using the class-weights instead of SMOTENC is worth it. Thus, I declare our best random forest model to be the SMOTENC model.
 
 ### Forecasts
 ![forecastexp_dol](https://user-images.githubusercontent.com/5288149/226216780-dd8a5f7c-1610-4f44-a4f6-a9033262abef.png)
