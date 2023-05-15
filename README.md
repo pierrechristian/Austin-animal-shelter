@@ -123,6 +123,15 @@ Here are the performance metrics of our best performing model on the holdout set
 - "neutral": precision=0.74, recall=0.63, f1-score=0.68
 - weighted average: precision=0.82, recall=0.82, f1-score=0.82
 - accuracy: 0.82 
+
+
+| outcome | precision | recall | f1-score   |
+| ------------- | ------------- |
+| bad  |0.35  |    0.45    |  0.39    |
+| good  | 0.87  |    0.91   |   0.89 |
+|neutral | 0.74    |  0.63    |  0.68 |
+|weighted average | 0.82    |  0.82    |  0.82 |
+
           precision    recall  f1-score   support
 
          bad       0.35      0.45      0.39       970
