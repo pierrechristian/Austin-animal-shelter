@@ -77,7 +77,7 @@ In this section, I engineered a two other features:
 ## Modeling
 In this section, I want to predict whether an animal's outcome is good, bad, or neutral. A key point in this analysis is the imbalanced dataset; because this animal shelter is "no-kill", there will be very few euthanasia. In fact, most outcomes for the animals are good (e.g., adopted or returned to owner), and there are very few bad (e.g., euthanasia) outcomes! 
 
-![imbalance_dataset](https://github.com/pierrechristian/Austin-animal-shelter/assets/5288149/fedfa773-1bff-4cb3-b498-2f62b094e861)
+![imbalance_dataset](https://github.com/pierrechristian/Austin-animal-shelter/assets/5288149/fecc1072-fc2c-4021-b094-752a847b3163)
 
 We will use two models, **random forest** and **gradient boosted trees**. We will also try multiple methods for dealing with the imbalanced dataset!
 
@@ -129,8 +129,7 @@ Here are the performance metrics of our best performing model on the holdout set
 
 Now that we have a a best overall model, we can see which of the features drive the classification the most. We can do this by computing the permutation importance:
 
-![permutation_importance](https://github.com/pierrechristian/Austin-animal-shelter/assets/5288149/18607bc8-7873-44e7-b47f-03053362b5a8)
-
+![permutation_importance](https://github.com/pierrechristian/Austin-animal-shelter/assets/5288149/28f1b364-12c2-4e49-aeb2-8849c66ffab2)
 
 The permutation importance plot reveals that the top three features that are most important are:
 
