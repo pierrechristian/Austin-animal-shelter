@@ -1,5 +1,5 @@
 # Austin-animal-shelter
-Analyzing cats and dogs data at Austin Animal Shelter, the largest no-kill shelter in the United States between October 2013 to March 2013.
+Analyzing cats and dogs data at Austin Animal Shelter, the largest no-kill shelter in the United States between October 2013 to March 2023.
 
 ## Goals
 1) Create a model to classify whether an animal at the shelter ends up with a "good" (e.g., adopted, returned to owner), "bad" (e.g., euthanized, lost), or "neutral" (e.g., transferred to a different shelter) outcome; a key challenge in accomplishing this goal is that the dataset is heavily **imbalanced** (very few "bad" outcomes)
